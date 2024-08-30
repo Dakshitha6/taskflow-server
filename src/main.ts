@@ -8,9 +8,8 @@ import { app } from "./app";
 import mainRouter from "./router/main.router";
 import { application } from "express";
 
-/**
- * Function to start the Express app
- */
+//Function to start the Express app
+
 async function startServer() {
 
   // Connect to MongoDB using Mongoose
