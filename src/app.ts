@@ -6,15 +6,17 @@ import { Config } from "./config/env.config";
 export const CreateExpressApp = () => {
   const app = express();
  
-  app.set("trust proxy", true); // Enables proxy support
-  app.use(express.json()); // Parse JSON requests
-  app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+  app.set("trust proxy", true);
+  app.use(express.json()); 
+  app.use(express.urlencoded({ extended: true })); 
   
-  // Enable CORS for the specified origin
   if (Config.NODE_ENV == "dev") {
     app.use(cors());
+
   } else {
-    app.use(cors({ origin: Config.CLIENT_URL })); 
+    app.use(cors());
+
+    // app.use(cors({ origin: Config.CLIENT_URL })); 
   }
   return app;
 };
