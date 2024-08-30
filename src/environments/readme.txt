@@ -1,0 +1,1 @@
+//Add allowed origins(client url) in .env 
