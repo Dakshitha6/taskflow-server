@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=prod node ./main.js",
     "start:dev": "cross-env NODE_ENV=dev ts-node-dev ./src/main.ts",
-    "build": "npm i && cross-env NODE_ENV=prod tsc -p . && cpy package.json dist && cpy voosh-firebase.json dist && cpy \"src/environments/**/*\" \"dist/environments\"",
+    "build": "npm rebuild && npm run watch-poll && cross-env NODE_ENV=prod tsc -p . && cpy package.json dist && cpy voosh-firebase.json dist && cpy \"src/environments/**/*\" \"dist/environments\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
