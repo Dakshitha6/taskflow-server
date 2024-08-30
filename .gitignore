@@ -11,5 +11,5 @@ logs
 
 dist 
 bundles
-*.json
+*voosh-firebase.json
 
