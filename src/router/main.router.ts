@@ -1,16 +1,16 @@
 import express, { Router } from "express";
-import { createTask } from "./route-handlers/create-task";
-import { updateTask } from "./route-handlers/update-task";
-import { deleteTask } from "./route-handlers/delete-task";
-import { getAllTasks } from "./route-handlers/get-all-tasks";
+import { TaskController } from "../modules/tasks/task.controller";
+
 
 
 
 const mainRouter: Router = express.Router();
-mainRouter.use("/createTask", createTask);
-mainRouter.use("/updateTask", updateTask);
-mainRouter.use("/deleteTask", deleteTask);
-mainRouter.use("/getAllTasks", getAllTasks);
+const taskController = new TaskController();
+
+mainRouter.post("/createTask", (req, res) => taskController.createTask(req, res));
+mainRouter.post("/updateTask", (req, res) => taskController.updateTask(req, res));
+mainRouter.post("/deleteTask", (req, res) => taskController.deleteTask(req, res));
+mainRouter.post("/getAllTasks", (req, res) => taskController.getAllTasks(req, res));
 
 
 

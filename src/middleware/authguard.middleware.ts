@@ -1,6 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../shared/functions/authentication";
-
 
 //Middleware to guard routes with Firebase token authentication.
 export const firebaseAuthGuard = async (
@@ -8,18 +6,24 @@ export const firebaseAuthGuard = async (
   res: Response,
   next: NextFunction
 ) => {
-
-
   try {
-     if (req.path === "/"   ) {
+    if (req.path === "/") {
       return next();
     }
-    
-    // Verify the token using Firebase
-    const decodedToken = await verifyToken(req);
-    res.locals.decodedToken = decodedToken;
 
-   
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      throw new Error("MISSING_TOKEN");
+    }
+
+    const firebaseAdmin = req.app.locals.firebaseAdmin;
+
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+
+    if (!decodedToken) {
+      throw new Error("Authentication failed");
+    }
+    res.locals.decodedToken = decodedToken;
 
     return next();
   } catch (error: any) {
