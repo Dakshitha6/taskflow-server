@@ -1,14 +1,7 @@
 node_modules
-.env.demo
-.env.prod
+*.env.prod
 
-logs
-
-/dist
 *.zip
-*.firebaserc
-*.log
 
 dist 
-bundles
 
